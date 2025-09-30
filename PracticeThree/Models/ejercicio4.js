@@ -30,4 +30,23 @@ class MatrizIdentidad {
     }
 }
 
-module.exports = MatrizIdentidad;
+const generar = (req, res) => {
+    const tamano = parseInt(req.params.tamano, 10);
+
+    if (isNaN(tamano) || tamano <= 0) {
+        return res.status(400).json({ error: 'El tamaño debe ser un número entero positivo.' });
+    }
+
+    try {
+        const matrizIdentidad = new MatrizIdentidad(tamano);
+        const matriz = matrizIdentidad.generarMatriz();
+        res.json({ matriz });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+module.exports = {
+    MatrizIdentidad,
+    generar
+};

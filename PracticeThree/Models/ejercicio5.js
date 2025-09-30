@@ -88,5 +88,18 @@ class MatrixProcessor {
     }
 }
 
-// Exporta la clase para que pueda ser importada en otros módulos.
-module.exports = { MatrixProcessor };
+const procesar = (req, res) => {
+    const { rows, cols } = req.body; // Get dimensions from request body
+
+    // Use provided dimensions or the defaults from the constructor
+    const processor = new MatrixProcessor(rows, cols);
+    
+    const results = processor.getAllResults();
+    res.json(results);
+};
+
+// Exporta la clase y el manejador para que puedan ser importados en otros módulos.
+module.exports = { 
+    MatrixProcessor,
+    procesar 
+};

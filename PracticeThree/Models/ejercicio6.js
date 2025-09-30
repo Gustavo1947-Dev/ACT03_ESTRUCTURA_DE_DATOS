@@ -123,5 +123,14 @@ class SalesProcessor {
     }
 }
 
-// Exporta la clase para que pueda ser importada en otros módulos.
-module.exports = { SalesProcessor };
+const analizar = (req, res) => {
+    const processor = new SalesProcessor();
+    const results = processor.getAllResults();
+    res.json(results);
+};
+
+// Exporta la clase y el manejador para que puedan ser importados en otros módulos.
+module.exports = { 
+    SalesProcessor,
+    analizar
+};
